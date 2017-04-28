@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NocMuzeowApp</string>
+    <string name="app_name_readable">Noc Muzeów</string>
+
+    <string name="navigation_drawer_open">Otwórz</string>
+    <string name="navigation_drawer_close">Zamknij</string>
+    <string name="drawer_scanner">Skaner QR</string>
+    <string name="drawer_challenge">Wyzwania</string>
+    <string name="drawer_heroes">Bohaterowie</string>
+    <string name="drawer_map">Mapa</string>
+
+
+
+    <string name="action_settings">Ustawienia</string>
+
+
+</resources>

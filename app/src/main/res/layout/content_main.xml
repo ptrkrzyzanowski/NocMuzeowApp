@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="edu.pjwstk.ifpk.nocmuzeowapp.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+    <ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/vf"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <include android:id="@+id/flip_scanner_layout" layout="@layout/flip_scanner" />
+        <include android:id="@+id/flip_heroes_layout" layout="@layout/flip_heroes" />
+        <include android:id="@+id/flip_challenge_layout" layout="@layout/flip_challenge" />
+        <include android:id="@+id/flip_map_layout" layout="@layout/flip_map" />
+        <include android:id="@+id/flip_details_layout" layout="@layout/flip_details" />
+
+    </ViewFlipper>
+
+</android.support.constraint.ConstraintLayout>
