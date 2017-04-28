@@ -10,8 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -23,6 +26,8 @@ import com.google.android.gms.vision.barcode.BarcodeDetector;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.pjwstk.ifpk.nocmuzeowapp.database.DBHelper;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -55,6 +60,7 @@ public class MainActivity extends AppCompatActivity
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
     // --------------------------------------------------------------------------------
+    HeroesPage heroesPage = null;
     // intent request code to handle updating play services if needed.
     private static final int RC_HANDLE_GMS = 9001;
 
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("MainActivity","Content view set");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -84,51 +91,16 @@ public class MainActivity extends AppCompatActivity
 
         createCameraSource(true, false);
 
-//        mPreview = new CameraPreview(this, mCamera);
-//        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-//        preview.addView(mPreview);
-/*
+//        DBHelper dbh = new DBHelper(this);
+//        int count = dbh.loadCSV();
+//        Toast.makeText(this, "loaded "+count+" heroes", Toast.LENGTH_SHORT).show();
+        GridView gridview = (GridView) findViewById(R.id.heroesview);
 
-        myBitmap = BitmapFactory.decodeResource(
-                getApplicationContext().getResources(),
-                R.drawable.img);
-
-        detector =
-                new BarcodeDetector.Builder(getApplicationContext())
-                        .setBarcodeFormats(Barcode.DATA_MATRIX | Barcode.QR_CODE)
-                        .build();
-        txtView = (TextView) findViewById(R.id.txtContent);
-        if (!detector.isOperational()) {
-            txtView.setText("Could not set up the detector!");
-            return;
+        if(gridview==null) {
+            Log.d("activity:init", "gridview == null");
         }
-        Button btn = (Button) findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Frame frame = new Frame.Builder().setBitmap(myBitmap).build();
-                SparseArray<Barcode> barcodes = detector.detect(frame);
-                Barcode thisCode = barcodes.valueAt(0);
-                TextView txtView = (TextView) findViewById(R.id.txtContent);
-                txtView.setText(thisCode.rawValue);
-            }
-        });
-        CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), detector)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
-                .setRequestedFps(15.0f)
-                .setAutoFocusEnabled(true);
-
-
-        mSource = builder.build();
-        //    .setFlashMode(useFlash ? Camera.Parameters.FLASH_MODE_TORCH : null)
-    //    detector.setProcessor(new MultiProcessor.Builder<Barcode>(new MultiProcessor.Factory<Barcode>() {
-     //       @Override
-     //       public Tracker<Barcode> create(Barcode barcode) {
-     //           return null;
-     //       }
-     //   }));
-*/
+        flipper.setDisplayedChild(FLIP_HEROES);
+        heroesPage = new HeroesPage(this);
 
     }
     private void createCameraSource(boolean autoFocus, boolean useFlash) {
@@ -141,7 +113,8 @@ public class MainActivity extends AppCompatActivity
         CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
                 .setFacing(CameraSource.CAMERA_FACING_BACK)
                 .setRequestedPreviewSize(1600, 1024)
-                .setRequestedFps(15.0f);
+                .setAutoFocusEnabled(true)
+                .setRequestedFps(10.0f);
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 //            builder = builder.setFocusMode(

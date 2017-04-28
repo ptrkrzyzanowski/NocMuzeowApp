@@ -29,14 +29,17 @@ android:columnCount="19">
 
         <edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview
             android:id="@+id/preview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal">
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:foregroundGravity="center"
+            android:paddingBottom="10dp">
 
             <edu.pjwstk.ifpk.nocmuzeowapp.GraphicOverlay
                 android:id="@+id/graphicOverlay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:foregroundGravity="center_vertical|center_horizontal|center" />
         </edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview>
 
     </LinearLayout>
