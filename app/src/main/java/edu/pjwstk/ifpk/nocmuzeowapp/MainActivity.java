@@ -22,11 +22,13 @@ import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
-
+//TODO: skalowalna mapa z uzyciem https://github.com/MikeOrtiz/TouchImageView
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity
 
     ViewFlipper flipper;
     Menu menuDrawer;
+    Deque<Integer> navigationStack = new ArrayDeque<Integer>();
 
     // ----------- Barcode ---------------------------------
 
@@ -149,7 +152,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if(navigationStack.isEmpty()!=true){
+                changeSelectedPage(navigationStack.pop(),false);
+            }
+            else{
+                super.onBackPressed();
+            }
         }
     }
 
@@ -180,13 +188,16 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        changeSelectedPage(pageMap.get(id));
+        changeSelectedPage(pageMap.get(id),true);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void changeSelectedPage(int page){
+    public void changeSelectedPage(int page,boolean pushToNavigationStack){
+        if(pushToNavigationStack==true){
+            navigationStack.push(current_page);
+        }
         if(current_page == FLIP_SCAN && page!= FLIP_SCAN){
             //disable scan
         }
@@ -195,6 +206,7 @@ public class MainActivity extends AppCompatActivity
             //enable scan
         }
         flipper.setDisplayedChild(page);
+
     }
 
     @Override
@@ -209,6 +221,7 @@ public class MainActivity extends AppCompatActivity
             mPreview.stop();
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -219,6 +232,6 @@ public class MainActivity extends AppCompatActivity
 
     public void swichToDetails(Hero hero) {
         detailsPage.setHero(hero);
-        changeSelectedPage(FLIP_DETAILS);
+        changeSelectedPage(FLIP_DETAILS,true);
     }
 }

@@ -37,18 +37,15 @@ public class ScannerPage {
             public void onClick(View v) {
                 foundLayout.setVisibility(View.INVISIBLE);
                 heroes.meetHero(ctx,foundName);
-                ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_HEROES);
+                ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_HEROES,true);
             }
         });
-    }
-    public void setFoundVisibility(boolean visibility){
-        foundLayout.setVisibility(visibility? View.VISIBLE:View.INVISIBLE);
     }
     public void trySetFoundHeroes(final String heroName){
 
         Log.e("trySetFoundHeroes",heroName);
         final Hero hero = heroes.getHero(heroName);
-        if(hero == null){
+        if(hero == null||hero.istKnown()){
             return;
         }
         ctx.runOnUiThread(new Runnable() {
