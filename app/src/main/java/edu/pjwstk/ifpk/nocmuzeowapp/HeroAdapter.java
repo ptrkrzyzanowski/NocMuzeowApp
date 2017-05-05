@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.pjwstk.ifpk.nocmuzeowapp.database.Hero;
+import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
 
 /**
  * Created by ptrkr on 28.04.2017.
@@ -45,7 +45,7 @@ class HeroAdapter extends BaseAdapter {
         try {
             while ((line = buffer.readLine()) != null) {
                 String[] colums = line.split(";");
-                if (colums.length != 3) {
+                if (colums.length != 4) {
                     Log.d("CSVParser", "Skipping Bad CSV Row");
                     continue;
                 }
@@ -53,7 +53,9 @@ class HeroAdapter extends BaseAdapter {
                 Resources resources = context.getResources();
                 final int resourceId = resources.getIdentifier(colums[2].trim(), "drawable",
                         context.getPackageName());
-                heroes.add(new Hero(insertedCount, colums[0].trim(),colums[1].trim(),colums[2].trim(),resourceId,false));
+                final int detailsId = resources.getIdentifier(colums[3].trim(), "drawable",
+                        context.getPackageName());
+                heroes.add(new Hero(insertedCount, colums[0].trim(),colums[1].trim(),colums[2].trim(),resourceId,detailsId,false));
             }
         } catch (IOException e) {
             e.printStackTrace();

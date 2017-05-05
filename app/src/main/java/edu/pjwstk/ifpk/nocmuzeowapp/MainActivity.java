@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,7 +37,11 @@ public class MainActivity extends AppCompatActivity
     public  static final int FLIP_DETAILS = 4;
     public  static final int FLIP_SCAN = 0;
     private int current_page = 0;
-    private ScannerPage scannerPage;
+
+    private ScannerPage scannerPage = null;
+    private HeroesPage heroesPage = null;
+    private DetailsPage detailsPage = null;
+
     private final Map<Integer,Integer> pageMap = createPageMap() ;
     private Map<Integer,Integer> createPageMap(){
         Map<Integer,Integer> map = new HashMap<>();
@@ -57,7 +63,6 @@ public class MainActivity extends AppCompatActivity
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
     // --------------------------------------------------------------------------------
-    HeroesPage heroesPage = null;
     // intent request code to handle updating play services if needed.
     private static final int RC_HANDLE_GMS = 9001;
 
@@ -98,6 +103,9 @@ public class MainActivity extends AppCompatActivity
         }
         flipper.setDisplayedChild(FLIP_HEROES);
         heroesPage = new HeroesPage(this,heroes);
+        detailsPage = new DetailsPage(this);
+
+
 
     }
     private void createCameraSource(boolean autoFocus, boolean useFlash, ScannerPage scannerPage) {
@@ -207,5 +215,10 @@ public class MainActivity extends AppCompatActivity
         if (mPreview != null) {
             mPreview.release();
         }
+    }
+
+    public void swichToDetails(Hero hero) {
+        detailsPage.setHero(hero);
+        changeSelectedPage(FLIP_DETAILS);
     }
 }

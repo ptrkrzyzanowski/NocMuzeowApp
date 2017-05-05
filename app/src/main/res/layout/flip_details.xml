@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:backgroundTint="@android:color/black"
     android:backgroundTintMode="add"
@@ -7,15 +8,31 @@
     android:rowCount="10"
     android:columnCount="19">
 
+    <ImageView
+        android:id="@+id/details_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/detalis_batman" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Hero details"
-        android:id="@+id/abc1"
+        android:id="@+id/details_name"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp" />
+
+    <TextView
+        android:id="@+id/details_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="55dp"
+        android:text="TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView TextView " />
 
 
 </RelativeLayout>

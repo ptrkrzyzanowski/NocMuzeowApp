@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import edu.pjwstk.ifpk.nocmuzeowapp.database.Hero;
+import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
 
 /**
  * Created by ptrkr on 28.04.2017.

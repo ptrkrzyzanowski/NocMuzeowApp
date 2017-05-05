@@ -1,10 +1,4 @@
-package edu.pjwstk.ifpk.nocmuzeowapp.database;
-
-import android.graphics.drawable.Drawable;
-
-/**
- * Created by ptrkr on 28.04.2017.
- */
+package edu.pjwstk.ifpk.nocmuzeowapp.DTO;
 
 public class Hero {
     public int getId() {
@@ -48,12 +42,14 @@ public class Hero {
     public int getDrawable(){
         return image;
     }
+    public int getDetailsDrawable(){return image_details;}
 
     private int id;
     private String name;
     private String description;
     private String imagename;
     private int image;
+    private int image_details;
     private boolean known;
     public Hero(){
 
@@ -66,12 +62,13 @@ public class Hero {
         this.known = false;
 
     }
-    public Hero(int id,String name, String description, String imagename,int img,boolean known){
+    public Hero(int id,String name, String description, String imagename,int img,int detaimg,boolean known){
         this.id=id;
         this.name=name;
         this.description=description;
         this.imagename=imagename;
         this.image=img;
+        this.image_details = detaimg;
         this.known = known;
 
     }

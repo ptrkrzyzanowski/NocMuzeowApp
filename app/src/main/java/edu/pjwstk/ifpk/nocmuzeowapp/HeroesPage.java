@@ -5,12 +5,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-/**
- * Created by ptrkr on 28.04.2017.
- */
+
 
 public class HeroesPage {
     HeroAdapter heroes;
@@ -30,10 +27,10 @@ public class HeroesPage {
                                     int position, long id) {
 
                 if(heroes.getHeroes().get(position).istKnown()){
-                    Toast.makeText(owner, "" + position, Toast.LENGTH_SHORT).show();
+                    ((MainActivity)owner).swichToDetails(heroes.getHeroes().get(position));
                 }
                 else{
-                    Toast.makeText(owner, "unknown", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(owner, "nieznany bohater", Toast.LENGTH_SHORT).show();
                 }
             }
         });
