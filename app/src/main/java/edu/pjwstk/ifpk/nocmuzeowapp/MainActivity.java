@@ -2,7 +2,6 @@ package edu.pjwstk.ifpk.nocmuzeowapp;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -27,18 +25,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.pjwstk.ifpk.nocmuzeowapp.database.DBHelper;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //  ----------- Pages -------------------------------
-    private static final int FLIP_CHALLENGE = 2;
-    private static final int FLIP_HEROES = 1;
-    private static final int FLIP_MAP = 3;
-    private static final int FLIP_DETAILS = 4;
-    private static final int FLIP_SCAN = 0;
+    public static final int FLIP_CHALLENGE = 2;
+    public  static final int FLIP_HEROES = 1;
+    public  static final int FLIP_MAP = 3;
+    public  static final int FLIP_DETAILS = 4;
+    public  static final int FLIP_SCAN = 0;
     private int current_page = 0;
+    private ScannerPage scannerPage;
     private final Map<Integer,Integer> pageMap = createPageMap() ;
     private Map<Integer,Integer> createPageMap(){
         Map<Integer,Integer> map = new HashMap<>();
@@ -85,14 +82,14 @@ public class MainActivity extends AppCompatActivity
 
 
         //scanner
+        HeroAdapter heroes = new HeroAdapter(this);
 
+        scannerPage = new ScannerPage(this,heroes);
         mPreview = (CameraSourcePreview) findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
+        createCameraSource(true, false,scannerPage);
 
-        createCameraSource(true, false);
 
-//        DBHelper dbh = new DBHelper(this);
-//        int count = dbh.loadCSV();
 //        Toast.makeText(this, "loaded "+count+" heroes", Toast.LENGTH_SHORT).show();
         GridView gridview = (GridView) findViewById(R.id.heroesview);
 
@@ -100,13 +97,14 @@ public class MainActivity extends AppCompatActivity
             Log.d("activity:init", "gridview == null");
         }
         flipper.setDisplayedChild(FLIP_HEROES);
-        heroesPage = new HeroesPage(this);
+        heroesPage = new HeroesPage(this,heroes);
 
     }
-    private void createCameraSource(boolean autoFocus, boolean useFlash) {
+    private void createCameraSource(boolean autoFocus, boolean useFlash, ScannerPage scannerPage) {
         Context context = getApplicationContext();
         BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
         BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay);
+        barcodeFactory.setScannerPage(scannerPage);
         barcodeDetector.setProcessor(
                 new MultiProcessor.Builder<>(barcodeFactory).build());
 
@@ -115,15 +113,7 @@ public class MainActivity extends AppCompatActivity
                 .setRequestedPreviewSize(1600, 1024)
                 .setAutoFocusEnabled(true)
                 .setRequestedFps(10.0f);
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-//            builder = builder.setFocusMode(
-//                    autoFocus ? Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE : null);
-//        }
-
-        mCameraSource = builder
-//                .setFlashMode(useFlash ? Camera.Parameters.FLASH_MODE_TORCH : null)
-                .build();
+        mCameraSource = builder.build();
     }
 
     private void startCameraSource() throws SecurityException {
@@ -188,7 +178,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void changeSelectedPage(int page){
+    public void changeSelectedPage(int page){
         if(current_page == FLIP_SCAN && page!= FLIP_SCAN){
             //disable scan
         }

@@ -63,6 +63,7 @@ public class Hero {
         this.name=name;
         this.description=description;
         this.imagename=imagename;
+        this.known = false;
 
     }
     public Hero(int id,String name, String description, String imagename,int img,boolean known){

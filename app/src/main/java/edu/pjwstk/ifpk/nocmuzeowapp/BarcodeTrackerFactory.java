@@ -16,6 +16,10 @@
 package edu.pjwstk.ifpk.nocmuzeowapp;
 
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.util.Log;
+
 import com.google.android.gms.vision.MultiProcessor;
 import com.google.android.gms.vision.Tracker;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -25,14 +29,24 @@ import com.google.android.gms.vision.barcode.Barcode;
  * multi-processor uses this factory to create barcode trackers as needed -- one for each barcode.
  */
 class BarcodeTrackerFactory implements MultiProcessor.Factory<Barcode> {
+    ScannerPage page;
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
     BarcodeTrackerFactory(GraphicOverlay<BarcodeGraphic> barcodeGraphicOverlay) {
         mGraphicOverlay = barcodeGraphicOverlay;
     }
+    public void setScannerPage(ScannerPage sp){
+        page = sp;
+    }
+
 
     @Override
     public Tracker<Barcode> create(Barcode barcode) {
+
+        Log.e("barcode_",barcode.rawValue);
+        if(page!=null)
+            page.trySetFoundHeroes(barcode.rawValue.trim());
+
         BarcodeGraphic graphic = new BarcodeGraphic(mGraphicOverlay);
         return new BarcodeGraphicTracker(mGraphicOverlay, graphic);
     }

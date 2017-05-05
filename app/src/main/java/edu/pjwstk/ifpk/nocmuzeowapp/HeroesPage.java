@@ -15,34 +15,28 @@ import android.widget.Toast;
 public class HeroesPage {
     HeroAdapter heroes;
     Activity owner;
-    public HeroesPage(final Activity owner){
+
+    public HeroesPage(final Activity owner, HeroAdapter adapter){
         this.owner=owner;
         GridView gridview = (GridView) owner.findViewById(R.id.heroesview);
 
         if(gridview==null) {
             Log.d("heroes page:init", "gridview == null");
         }
-        heroes = new HeroAdapter(owner);
+        heroes = adapter;
         gridview.setAdapter(heroes);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
                 if(heroes.getHeroes().get(position).istKnown()){
-                    Toast.makeText(owner, "" + position,
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(owner, "" + position, Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(owner, "unknown",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(owner, "unknown", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
-
-
-
     }
 
 }
