@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -19,10 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
-
-/**
- * Created by ptrkr on 28.04.2017.
- */
 
 class HeroAdapter extends BaseAdapter {
     private Context context;
@@ -119,23 +118,25 @@ class HeroAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        View view;
         if (convertView == null) {            // if it's not recycled, initialize some attributes
-            imageView = new ImageView(context);
-            imageView.setLayoutParams(new GridView.LayoutParams( 200,200));
-            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imageView.setPadding(4, 4, 4, 4);
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.grid_item, null);
         } else {
-            imageView = (ImageView) convertView;
+            view = convertView;
         }
-
+        ImageView imageView = (ImageView) view.findViewById(R.id.grid_item_image);
+        TextView textView = (TextView) view.findViewById(R.id.grid_item_text);
         if(heroes.get(position).istKnown()){
             imageView.setImageResource(heroes.get(position).getDrawable());
+            textView.setText(heroes.get(position).getName());
         }
         else{
             imageView.setImageResource(R.drawable.hero_unknown);
+            textView.setText("????");
         }
-        return imageView;
+        return view;
     }
 
     public  List<Hero> getHeroes(){

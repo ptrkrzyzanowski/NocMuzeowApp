@@ -2,6 +2,7 @@ package edu.pjwstk.ifpk.nocmuzeowapp;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.GridView;
 import android.widget.ViewFlipper;
 
@@ -78,6 +80,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setTitle("PJHero");       // set title
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -108,6 +112,10 @@ public class MainActivity extends AppCompatActivity
         heroesPage = new HeroesPage(this,heroes);
         detailsPage = new DetailsPage(this);
 
+        WebView wv = (WebView) findViewById(R.id.mapwview);
+        wv.getSettings().setBuiltInZoomControls(true);
+        wv.setInitialScale(100);
+        wv.loadUrl("file:///android_asset/mapa.png");
 
 
     }

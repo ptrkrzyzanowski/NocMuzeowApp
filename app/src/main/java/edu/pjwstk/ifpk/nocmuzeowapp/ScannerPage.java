@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
 
-/**
- * Created by ptrkr on 28.04.2017.
- */
-
 public class ScannerPage {
     Activity ctx;
     HeroAdapter heroes;
