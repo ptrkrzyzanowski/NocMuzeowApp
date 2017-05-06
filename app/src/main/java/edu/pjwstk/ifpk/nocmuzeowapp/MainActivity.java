@@ -1,8 +1,5 @@
 package edu.pjwstk.ifpk.nocmuzeowapp;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,77 +7,55 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.widget.GridView;
 import android.widget.ViewFlipper;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.MultiProcessor;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
 
-import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
-//TODO: skalowalna mapa z uzyciem https://github.com/MikeOrtiz/TouchImageView
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //  ----------- Pages -------------------------------
-    public static final int FLIP_CHALLENGE = 2;
+    public static final int FLIP_RIDDLE = 2;
     public  static final int FLIP_HEROES = 1;
     public  static final int FLIP_MAP = 3;
     public  static final int FLIP_DETAILS = 4;
     public  static final int FLIP_SCAN = 0;
-    private int current_page = 0;
+    private int current_page = FLIP_SCAN;
 
-    private ScannerPage scannerPage = null;
-    private HeroesPage heroesPage = null;
-    private DetailsPage detailsPage = null;
+//    private DetailsPage detailsPage = null;
 
     private final Map<Integer,Integer> pageMap = createPageMap() ;
     private Map<Integer,Integer> createPageMap(){
         Map<Integer,Integer> map = new HashMap<>();
         map.put( R.id.nav_heroes,FLIP_HEROES);
-        map.put( R.id.nav_challange,FLIP_CHALLENGE);
+        map.put( R.id.nav_challange,FLIP_RIDDLE);
         map.put( R.id.nav_map,FLIP_MAP);
         map.put( R.id.nav_scan,FLIP_SCAN);
         return map;
     }
+    private Map<Integer,Page> pages = new HashMap<>();
     // ------------ Drawer --------------------------------
 
-    ViewFlipper flipper;
-    Menu menuDrawer;
-    Deque<Integer> navigationStack = new ArrayDeque<Integer>();
-
-    // ----------- Barcode ---------------------------------
-
-    private CameraSource mCameraSource;
-    private CameraSourcePreview mPreview;
-    private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
-
-    // --------------------------------------------------------------------------------
-    // intent request code to handle updating play services if needed.
-    private static final int RC_HANDLE_GMS = 9001;
+    private ViewFlipper flipper;
+    private Menu menuDrawer;
+    private Deque<Integer> navigationStack = new ArrayDeque<Integer>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("MainActivity","Content view set");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        getSupportActionBar().setTitle("PJHero");       // set title
+        getSupportActionBar().setTitle("PJHero");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -93,67 +68,17 @@ public class MainActivity extends AppCompatActivity
         flipper = (ViewFlipper) findViewById(R.id.vf);
 
 
-        //scanner
         HeroAdapter heroes = new HeroAdapter(this);
 
-        scannerPage = new ScannerPage(this,heroes);
-        mPreview = (CameraSourcePreview) findViewById(R.id.preview);
-        mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) findViewById(R.id.graphicOverlay);
-        createCameraSource(true, false,scannerPage);
-
-
-//        Toast.makeText(this, "loaded "+count+" heroes", Toast.LENGTH_SHORT).show();
-        GridView gridview = (GridView) findViewById(R.id.heroesview);
-
-        if(gridview==null) {
-            Log.d("activity:init", "gridview == null");
-        }
-        flipper.setDisplayedChild(FLIP_HEROES);
-        heroesPage = new HeroesPage(this,heroes);
-        detailsPage = new DetailsPage(this);
-
-        WebView wv = (WebView) findViewById(R.id.mapwview);
-        wv.getSettings().setBuiltInZoomControls(true);
-        wv.setInitialScale(100);
-        wv.loadUrl("file:///android_asset/mapa.png");
-
-
-    }
-    private void createCameraSource(boolean autoFocus, boolean useFlash, ScannerPage scannerPage) {
-        Context context = getApplicationContext();
-        BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(context).build();
-        BarcodeTrackerFactory barcodeFactory = new BarcodeTrackerFactory(mGraphicOverlay);
-        barcodeFactory.setScannerPage(scannerPage);
-        barcodeDetector.setProcessor(
-                new MultiProcessor.Builder<>(barcodeFactory).build());
-
-        CameraSource.Builder builder = new CameraSource.Builder(getApplicationContext(), barcodeDetector)
-                .setFacing(CameraSource.CAMERA_FACING_BACK)
-                .setRequestedPreviewSize(1600, 1024)
-                .setAutoFocusEnabled(true)
-                .setRequestedFps(10.0f);
-        mCameraSource = builder.build();
+        pages.put(FLIP_SCAN,new ScannerPage(this,heroes));
+        pages.put(FLIP_HEROES,new HeroesPage(this,heroes));
+        pages.put(FLIP_DETAILS,new DetailsPage(this));
+        pages.put(FLIP_MAP,new MapPage(this));
+        pages.put(FLIP_RIDDLE,new RiddlePage(this,heroes));
     }
 
-    private void startCameraSource() throws SecurityException {
-        // check that the device has play services available.
-        int code = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(
-                getApplicationContext());
-        if (code != ConnectionResult.SUCCESS) {
-            Dialog dlg =
-                    GoogleApiAvailability.getInstance().getErrorDialog(this, code, RC_HANDLE_GMS);
-            dlg.show();
-        }
 
-        if (mCameraSource != null) {
-            try {
-                mPreview.start(mCameraSource, mGraphicOverlay);
-            } catch (IOException e) {
-                mCameraSource.release();
-                mCameraSource = null;
-            }
-        }
-    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -171,7 +96,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuDrawer = menu;
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -202,17 +126,16 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     public void changeSelectedPage(int page,boolean pushToNavigationStack){
-        if(pushToNavigationStack==true){
+        if(pushToNavigationStack==true)
             navigationStack.push(current_page);
-        }
-        if(current_page == FLIP_SCAN && page!= FLIP_SCAN){
-            //disable scan
-        }
+        if(current_page == page)
+            return;
+
+        pages.get(page).onPageEnter();
+        pages.get(current_page).onPageExit();
         current_page = page;
-        if(page == FLIP_SCAN){
-            //enable scan
-        }
         flipper.setDisplayedChild(page);
 
     }
@@ -220,26 +143,28 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        startCameraSource();
+        for(Page p:pages.values()){
+            p.onResume();
+        }
     }
     @Override
     protected void onPause() {
         super.onPause();
-        if (mPreview != null) {
-            mPreview.stop();
+        for(Page p:pages.values()){
+            p.onPause();
         }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPreview != null) {
-            mPreview.release();
+        for(Page p:pages.values()){
+            p.onDestroy();
         }
     }
 
     public void swichToDetails(Hero hero) {
-        detailsPage.setHero(hero);
+        ((DetailsPage)pages.get(FLIP_DETAILS)).setHero(hero);
         changeSelectedPage(FLIP_DETAILS,true);
     }
 }

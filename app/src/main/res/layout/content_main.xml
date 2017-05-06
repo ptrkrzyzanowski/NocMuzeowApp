@@ -15,7 +15,7 @@
 
         <include android:id="@+id/flip_scanner_layout" layout="@layout/flip_scanner" />
         <include android:id="@+id/flip_heroes_layout" layout="@layout/flip_heroes" />
-        <include android:id="@+id/flip_challenge_layout" layout="@layout/flip_challenge" />
+        <include android:id="@+id/flip_challenge_layout" layout="@layout/flip_riddle" />
         <include android:id="@+id/flip_map_layout" layout="@layout/flip_map" />
         <include android:id="@+id/flip_details_layout" layout="@layout/flip_details" />
 

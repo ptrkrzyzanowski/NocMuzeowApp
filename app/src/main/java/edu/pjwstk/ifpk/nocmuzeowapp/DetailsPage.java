@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
 
-public class DetailsPage {
+public class DetailsPage extends Page{
     Activity owner;
     Hero hero;
     private TextView nameTV;
@@ -31,4 +31,13 @@ public class DetailsPage {
         });
     }
 
+    @Override
+    void onPageEnter() {
+
+    }
+
+    @Override
+    void onPageExit() {
+
+    }
 }

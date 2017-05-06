@@ -5,11 +5,9 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,16 +20,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
+import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Riddle;
+import edu.pjwstk.ifpk.nocmuzeowapp.DTO.RiddleType;
 
 class HeroAdapter extends BaseAdapter {
     private Context context;
     private List<Hero> heroes = new ArrayList<>();
+    private List<Riddle> riddles = new ArrayList<>();
 
     public HeroAdapter(Context ctx) {
         context=ctx;
         loadCSV();
         loadPreferences(ctx);
+        cleanRiddles();
     }
+
+    private void cleanRiddles() {
+        List<Riddle> deleted = new ArrayList<>();
+        for(Riddle r:riddles){
+            if(r.getHero().istKnown()==true){
+                deleted.add(r);
+            }
+        }
+        for(Riddle d:deleted){
+            riddles.remove(d);
+        }
+    }
+
     private void loadCSV(){
         int insertedCount = 0;
         InputStream inStream = null;
@@ -56,10 +71,43 @@ class HeroAdapter extends BaseAdapter {
                         context.getPackageName());
                 heroes.add(new Hero(insertedCount, colums[0].trim(),colums[1].trim(),colums[2].trim(),resourceId,detailsId,false));
             }
+            inStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        inStream = context.getResources().openRawResource(R.raw.riddles);
+        if(inStream==null){
+            Toast.makeText(context, "cannot load riddle.csv", Toast.LENGTH_SHORT).show();
+        }
+        buffer = new BufferedReader(new InputStreamReader(inStream));
+        try {
+            Hero hero = null;
+            while ((line = buffer.readLine()) != null) {
+                String[] colums = line.split(";");
+                if (colums.length != 4) {
+                    Log.d("CSVParser", "Skipping Bad CSV Row");
+                    continue;
+                }
+                Resources resources = context.getResources();
+                hero = this.getHero(colums[0]);
+                if(hero!=null){
+                    RiddleType type = RiddleType.getType(colums[2]);
+                    if(type==RiddleType.RT_TEXT)
+                        riddles.add(new Riddle(hero,colums[1],RiddleType.RT_TEXT,colums[3],0));
+                    if(type==RiddleType.RT_IMAGE) {
+                        final int resourceID = resources.getIdentifier(colums[3].trim(), "drawable",
+                                context.getPackageName());
+                        Log.e("loadRiddle",""+resourceID);
+                        riddles.add(new Riddle(hero, colums[1], RiddleType.RT_IMAGE, "",resourceID));
+                    }
+                    if(type==RiddleType.RT_MOVIE)
+                        riddles.add(new Riddle(hero,colums[1],RiddleType.RT_MOVIE,colums[3],0));
+                }
+            }
+            inStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     private void loadPreferences(Context ctx){
         SharedPreferences sharedPref = ctx.getSharedPreferences("heroPref",Context.MODE_PRIVATE);
@@ -69,14 +117,7 @@ class HeroAdapter extends BaseAdapter {
             }
         }
     }
-    public void savePeferences(Context ctx){
-        SharedPreferences sharedPref = ctx.getSharedPreferences("heroPref",Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        for(Hero hero:heroes){
-            editor.putBoolean(hero.getName(),hero.istKnown());
-        }
-        editor.commit();
-    }
+
     public void meetHero(Context ctx,String heroName){
         Log.e("meetHero",heroName+" search");
         for(Hero hero:heroes) {
@@ -88,6 +129,7 @@ class HeroAdapter extends BaseAdapter {
                 editor.apply();
                 Log.e("meetHero","found "+heroName+", data invalidated");
                 this.notifyDataSetChanged();
+                cleanRiddles();
             }
 
         }
@@ -142,5 +184,5 @@ class HeroAdapter extends BaseAdapter {
     public  List<Hero> getHeroes(){
         return heroes;
     }
-
+    public  List<Riddle> getRiddles() {return riddles;}
 }

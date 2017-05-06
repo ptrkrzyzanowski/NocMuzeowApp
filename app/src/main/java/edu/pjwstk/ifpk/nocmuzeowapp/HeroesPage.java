@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 
 
-public class HeroesPage {
+public class HeroesPage extends Page{
     HeroAdapter heroes;
     Activity owner;
 
@@ -36,4 +36,13 @@ public class HeroesPage {
         });
     }
 
+    @Override
+    void onPageEnter() {
+
+    }
+
+    @Override
+    void onPageExit() {
+
+    }
 }
