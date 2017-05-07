@@ -1,5 +1,6 @@
 package edu.pjwstk.ifpk.nocmuzeowapp;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,14 +8,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import edu.pjwstk.ifpk.nocmuzeowapp.DTO.Hero;
@@ -30,8 +41,6 @@ public class MainActivity extends AppCompatActivity
     public  static final int FLIP_SCAN = 0;
     private int current_page = FLIP_SCAN;
 
-//    private DetailsPage detailsPage = null;
-
     private final Map<Integer,Integer> pageMap = createPageMap() ;
     private Map<Integer,Integer> createPageMap(){
         Map<Integer,Integer> map = new HashMap<>();
@@ -45,8 +54,10 @@ public class MainActivity extends AppCompatActivity
     // ------------ Drawer --------------------------------
 
     private ViewFlipper flipper;
-    private Menu menuDrawer;
-    private Deque<Integer> navigationStack = new ArrayDeque<Integer>();
+    DrawerLayout drawer;
+    NavigationView navigationView;
+    private Deque<Integer> navigationStack = new ArrayDeque<>();
+    Typeface typeface;
 
 
     @Override
@@ -57,13 +68,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("PJHero");
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         flipper = (ViewFlipper) findViewById(R.id.vf);
 
@@ -75,13 +86,76 @@ public class MainActivity extends AppCompatActivity
         pages.put(FLIP_DETAILS,new DetailsPage(this));
         pages.put(FLIP_MAP,new MapPage(this));
         pages.put(FLIP_RIDDLE,new RiddlePage(this,heroes));
+
+        typeface = Typeface.createFromAsset(getAssets(),
+                "fonts/OCR-A.ttf"); 
+        setTypeface(typeface);
     }
 
+    public Typeface getTypeface(){
+        return typeface;
+    }
+
+
+    private List<View> getAllChildren(View v) {
+
+        if (!(v instanceof ViewGroup)) {
+            ArrayList<View> viewArrayList = new ArrayList<View>();
+            viewArrayList.add(v);
+            return viewArrayList;
+        }
+
+        ArrayList<View> result = new ArrayList<View>();
+        ViewGroup viewGroup = (ViewGroup) v;
+        for (int i = 0; i < viewGroup.getChildCount(); i++) {
+            View child = viewGroup.getChildAt(i);
+            result.addAll(getAllChildren(child));
+        }
+        return result;
+    }
+    private void applyFontToMenuItem(MenuItem mi) {
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , typeface), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
+    }
+
+    private void setTypeface(Typeface tf) {
+        List<View> views = getAllChildren(getWindow().getDecorView());
+   //     views.addAll(getAllChildren(navigationView));
+        for(View v:views){
+            if(v instanceof TextView){
+                Log.e("setTypeface","TV");
+                ((TextView)v).setTypeface(tf);
+            }
+            if(v instanceof Button){
+                ((Button)v).setTypeface(tf);
+                Log.e("setTypeface","B");
+            }
+            Menu m = navigationView.getMenu();
+            for (int i=0;i<m.size();i++) {
+                MenuItem mi = m.getItem(i);
+
+                //for aapplying a font to subMenu ...
+                SubMenu subMenu = mi.getSubMenu();
+                if (subMenu!=null && subMenu.size() >0 ) {
+                    for (int j=0; j <subMenu.size();j++) {
+                        MenuItem subMenuItem = subMenu.getItem(j);
+                        applyFontToMenuItem(subMenuItem);
+                    }
+                }
+
+                //the method we have create in activity
+                applyFontToMenuItem(mi);
+            }
+
+
+
+        }
+    }
 
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -96,7 +170,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menuDrawer = menu;
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }

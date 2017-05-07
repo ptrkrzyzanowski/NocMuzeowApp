@@ -170,6 +170,7 @@ class HeroAdapter extends BaseAdapter {
         }
         ImageView imageView = (ImageView) view.findViewById(R.id.grid_item_image);
         TextView textView = (TextView) view.findViewById(R.id.grid_item_text);
+        textView.setTypeface(((MainActivity)context).getTypeface());
         if(heroes.get(position).istKnown()){
             imageView.setImageResource(heroes.get(position).getDrawable());
             textView.setText(heroes.get(position).getName());
