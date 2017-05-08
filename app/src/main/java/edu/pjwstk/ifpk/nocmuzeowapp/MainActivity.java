@@ -1,8 +1,12 @@
 package edu.pjwstk.ifpk.nocmuzeowapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -58,11 +62,25 @@ public class MainActivity extends AppCompatActivity
     NavigationView navigationView;
     private Deque<Integer> navigationStack = new ArrayDeque<>();
     Typeface typeface;
+    private static final int CAMERA_PERM=11 ;
+    HeroAdapter heroes;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        heroes = new HeroAdapter(this);
+
+
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERM);
+        }
+        else{
+            pages.put(FLIP_SCAN,new ScannerPage(this,heroes));
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -79,9 +97,8 @@ public class MainActivity extends AppCompatActivity
         flipper = (ViewFlipper) findViewById(R.id.vf);
 
 
-        HeroAdapter heroes = new HeroAdapter(this);
 
-        pages.put(FLIP_SCAN,new ScannerPage(this,heroes));
+
         pages.put(FLIP_HEROES,new HeroesPage(this,heroes));
         pages.put(FLIP_DETAILS,new DetailsPage(this));
         pages.put(FLIP_MAP,new MapPage(this));
@@ -152,7 +169,19 @@ public class MainActivity extends AppCompatActivity
 
         }
     }
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case CAMERA_PERM: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    pages.put(FLIP_SCAN,new ScannerPage(this,heroes));
+                } else {
+                    // permission denied, boo! Disable
+                }
+                return;
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
