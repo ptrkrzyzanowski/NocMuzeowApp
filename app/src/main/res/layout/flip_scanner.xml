@@ -1,72 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
 android:backgroundTint="@android:color/black"
 android:backgroundTintMode="add"
-android:layout_height="match_parent"
-android:rowCount="10"
-android:columnCount="19">
+android:layout_height="match_parent">
+
+    <edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview
+        android:id="@+id/preview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight=".35"
+        android:foregroundGravity="center"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp">
+
+        <edu.pjwstk.ifpk.nocmuzeowapp.GraphicOverlay
+            android:id="@+id/graphicOverlay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:foregroundGravity="center_vertical|center_horizontal|center"
+            android:padding="0dp" />
+    </edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview>
 
     <LinearLayout
+        android:id="@+id/foundHeroLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="100dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical|fill_horizontal"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:visibility="invisible"
+        android:weightSum="1">
 
-        <edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview
-            android:id="@+id/preview"
-            android:layout_width="336dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:foregroundGravity="center"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <edu.pjwstk.ifpk.nocmuzeowapp.GraphicOverlay
-                android:id="@+id/graphicOverlay"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:foregroundGravity="center_vertical|center_horizontal|center" />
-        </edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview>
-
-        <LinearLayout
-            android:id="@+id/foundHeroLayout"
+        <TextView
+            android:id="@+id/foundHeroText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:visibility="invisible"
-            android:weightSum="1">
+            android:layout_weight=".35"
+            android:gravity="center"
+            android:text="First line\r\nNext line"
+            android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/foundHeroText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".35"
-                android:text="First line\r\nNext line"
-                android:textSize="30sp" />
+        <ImageView
+            android:id="@+id/foundHeroImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".65"
+            app:srcCompat="@drawable/hero_aatrox" />
 
-            <ImageView
-                android:id="@+id/foundHeroImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight=".65"
-                app:srcCompat="@drawable/hero_aatrox" />
-
-            <Button
-                android:id="@+id/foundHeroButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:text="OK" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/foundHeroButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="OK" />
 
     </LinearLayout>
 
 
-</RelativeLayout>
+</FrameLayout>

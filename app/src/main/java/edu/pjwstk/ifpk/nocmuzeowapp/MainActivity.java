@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         heroes = new HeroAdapter(this);
 
-
+        setContentView(R.layout.activity_main);
         if(ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         else{
             pages.put(FLIP_SCAN,new ScannerPage(this,heroes));
         }
-        setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("PJHero");
