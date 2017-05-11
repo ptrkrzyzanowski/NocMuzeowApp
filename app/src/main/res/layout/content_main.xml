@@ -12,7 +12,7 @@
         android:id="@+id/vf"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-
+        <include android:id="@+id/flip_main_layout" layout="@layout/flip_main" />
         <include android:id="@+id/flip_scanner_layout" layout="@layout/flip_scanner" />
         <include android:id="@+id/flip_heroes_layout" layout="@layout/flip_heroes" />
         <include android:id="@+id/flip_challenge_layout" layout="@layout/flip_riddle" />

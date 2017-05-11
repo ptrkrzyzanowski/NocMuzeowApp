@@ -88,7 +88,12 @@ public class CameraSourcePreview extends ViewGroup {
     @RequiresPermission(Manifest.permission.CAMERA)
     private void startIfReady() throws IOException, SecurityException {
         if (mStartRequested && mSurfaceAvailable) {
-            mCameraSource.start(mSurfaceView.getHolder());
+            try {
+                mCameraSource.start(mSurfaceView.getHolder());
+            }catch(Exception e){
+                Log.e("startIfReady", e.getMessage());
+                e.printStackTrace();
+            }
             if (mOverlay != null) {
                 Size size = mCameraSource.getPreviewSize();
                 int min = Math.min(size.getWidth(), size.getHeight());

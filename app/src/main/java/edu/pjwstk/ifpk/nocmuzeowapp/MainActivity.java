@@ -38,11 +38,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //  ----------- Pages -------------------------------
-    public static final int FLIP_RIDDLE = 2;
-    public  static final int FLIP_HEROES = 1;
-    public  static final int FLIP_MAP = 3;
-    public  static final int FLIP_DETAILS = 4;
-    public  static final int FLIP_SCAN = 0;
+    public static final int FLIP_RIDDLE = 3;
+    public  static final int FLIP_HEROES = 2;
+    public  static final int FLIP_MAP = 4;
+    public  static final int FLIP_DETAILS = 5;
+    public  static final int FLIP_SCAN = 1;
+    public static final int FLIP_MAIN = 0;
     private int current_page = FLIP_SCAN;
 
     private final Map<Integer,Integer> pageMap = createPageMap() ;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         map.put( R.id.nav_challange,FLIP_RIDDLE);
         map.put( R.id.nav_map,FLIP_MAP);
         map.put( R.id.nav_scan,FLIP_SCAN);
+        map.put( R.id.nav_main,FLIP_MAIN);
         return map;
     }
     private Map<Integer,Page> pages = new HashMap<>();
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity
         pages.put(FLIP_DETAILS,new DetailsPage(this));
         pages.put(FLIP_MAP,new MapPage(this));
         pages.put(FLIP_RIDDLE,new RiddlePage(this,heroes));
+        pages.put(FLIP_MAIN, new MainPage(this));
 
         typeface = Typeface.createFromAsset(getAssets(),
                 "fonts/OCR-A.ttf"); 

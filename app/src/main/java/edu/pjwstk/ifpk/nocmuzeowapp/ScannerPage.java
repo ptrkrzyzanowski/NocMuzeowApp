@@ -48,7 +48,7 @@ public class ScannerPage extends Page{
             public void onClick(View v) {
                 foundLayout.setVisibility(View.INVISIBLE);
                 heroes.meetHero(ctx,foundName);
-                ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_HEROES,true);
+                ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_HEROES,true); // true zapamiętuje stronę w backu
             }
         });
         mPreview = (CameraSourcePreview) ctx.findViewById(R.id.preview);

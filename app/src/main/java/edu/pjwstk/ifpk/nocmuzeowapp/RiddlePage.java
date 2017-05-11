@@ -28,8 +28,6 @@ public class RiddlePage extends Page {
     TextView nameTV;
     TextView descriptionTV;
     ImageView imageIV;
-    VideoView videoVV;
-    MediaController controller;
     Button buttonBT;
 
 
@@ -39,10 +37,6 @@ public class RiddlePage extends Page {
         nameTV = (TextView)ctx.findViewById(R.id.riddle_name);
         descriptionTV = (TextView)ctx.findViewById(R.id.riddle_text);
         imageIV = (ImageView)ctx.findViewById(R.id.riddle_image);
-        videoVV = (VideoView)ctx.findViewById(R.id.riddle_surface);
-        controller = new MediaController(ctx);
-        controller.setMediaPlayer(videoVV);
-        videoVV.setMediaController(controller);
 
         buttonBT = (Button)ctx.findViewById(R.id.riddle_button);
         buttonBT.setOnClickListener(new View.OnClickListener() {
@@ -55,21 +49,14 @@ public class RiddlePage extends Page {
     @Override
     void onPageEnter() {
         nextRiddle();
-        videoVV.setZOrderMediaOverlay(true);
     }
 
     @Override
     void onPageExit() {
-        videoVV.setVisibility(View.GONE);
-        videoVV.setZOrderMediaOverlay(false);
     }
     void nextRiddle(){
         List<Riddle> riddles = heroes.getRiddles();
         if(riddles.size()==0){
-            nameTV.setVisibility(View.GONE);
-            descriptionTV.setVisibility(View.GONE);
-            imageIV.setVisibility(View.GONE);
-            videoVV.setVisibility(View.GONE);
 
         }else  if(riddles.size()==1){
             current = riddles.get(0);
@@ -81,28 +68,6 @@ public class RiddlePage extends Page {
         }
         nameTV.setText(current.getName());
 
-        imageIV.setVisibility(View.GONE);
-        descriptionTV.setVisibility(View.GONE);
-        videoVV.setVisibility(View.GONE);
-
-        if(current.getType()== RiddleType.RT_TEXT){
             descriptionTV.setText(current.getDescription());
-            descriptionTV.setVisibility(View.VISIBLE);
-        }
-        if(current.getType()==RiddleType.RT_IMAGE){
-            imageIV.setImageResource(current.getResource());
-            Log.e("nextRiddle",""+current.getResource());
-            imageIV.setVisibility(View.VISIBLE);
-        }
-        if(current.getType()==RiddleType.RT_MOVIE){
-            imageIV.setImageResource(0);
-            videoVV.setVideoURI(Uri.parse("android.resource://" + ctx.getPackageName() + "/" + R.raw.secret));
-            videoVV.requestFocus();
-            videoVV.bringToFront();
-
-            videoVV.start();
-            videoVV.setVisibility(View.VISIBLE);
-
-        }
     }
 }

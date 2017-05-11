@@ -28,14 +28,15 @@ android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/foundHeroLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
+        android:foregroundTint="@color/colorPrimary"
         android:gravity="center_vertical|fill_horizontal"
         android:orientation="horizontal"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:weightSum="1">
 
         <TextView
@@ -50,7 +51,7 @@ android:layout_height="match_parent">
         <ImageView
             android:id="@+id/foundHeroImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight=".65"
             app:srcCompat="@drawable/hero_aatrox" />
 
