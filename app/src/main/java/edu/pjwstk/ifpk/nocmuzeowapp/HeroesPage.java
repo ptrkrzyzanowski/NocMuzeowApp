@@ -11,10 +11,9 @@ import android.widget.Toast;
 
 public class HeroesPage extends Page{
     HeroAdapter heroes;
-    Activity owner;
 
     public HeroesPage(final Activity owner, HeroAdapter adapter){
-        this.owner=owner;
+        ctx=owner;
         GridView gridview = (GridView) owner.findViewById(R.id.heroesview);
 
         if(gridview==null) {
@@ -30,7 +29,12 @@ public class HeroesPage extends Page{
                     ((MainActivity)owner).swichToDetails(heroes.getHeroes().get(position));
                 }
                 else{
-                    Toast.makeText(owner, "nieznany bohater", Toast.LENGTH_SHORT).show();
+                    if(position==heroes.getFirstUnknownHeroId()){
+                        ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_RIDDLE,true);
+                    }
+                    else {
+                        Toast.makeText(owner, "rozwiąż najpierw wcześniejszą zagadkę: "+heroes.getFirstUnknownHeroId(), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

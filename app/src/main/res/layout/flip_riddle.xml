@@ -4,28 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:backgroundTint="@android:color/black"
     android:backgroundTintMode="add"
-    android:layout_height="match_parent"
-    android:rowCount="10"
-    android:columnCount="19">
-
-    <VideoView
-        android:id="@+id/riddle_surface"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="false"
-        android:layout_alignTop="@+id/riddle_text"
-        android:layout_below="@+id/riddle_name" />
-
-    <Button
-        android:id="@+id/riddle_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:layout_weight="5"
-        android:text="Następna" />
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/riddle_name"
@@ -39,22 +18,22 @@
 
     <ImageView
         android:id="@+id/riddle_image"
-        android:layout_width="wrap_content"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/riddle_name" />
+        android:layout_below="@+id/riddle_name"
+        app:srcCompat="@drawable/detalis_batman" />
 
     <TextView
         android:id="@+id/riddle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/riddle_image"
-        android:layout_below="@+id/riddle_name"
+        android:layout_below="@+id/riddle_image"
         android:layout_marginTop="20dp"
-        android:layout_toEndOf="@+id/riddle_image"
-        android:layout_toRightOf="@+id/riddle_image"
         android:text="TextView"
         android:textColor="?android:attr/editTextColor"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="visible" />
 
 
 
