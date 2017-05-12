@@ -70,6 +70,7 @@ class HeroAdapter extends BaseAdapter {
                 final int detailsId = resources.getIdentifier(colums[3].trim(), "drawable",
                         context.getPackageName());
                 heroes.add(new Hero(insertedCount, colums[0].trim(),colums[1].trim(),colums[2].trim(),resourceId,detailsId,false));
+                insertedCount++;
             }
             inStream.close();
         } catch (IOException e) {
@@ -134,6 +135,17 @@ class HeroAdapter extends BaseAdapter {
 
         }
     }
+    public int getFirstUnknownHeroId(){
+        if(riddles.size()!=0)
+            return riddles.get(0).getHero().getId();
+        return -1;
+    }
+    public Riddle getFirstUnknownRiddle(){
+        if(riddles.size()!=0)
+            return riddles.get(0);
+        return null;
+    }
+
     public Hero getHero(String heroName){
         for(Hero hero:heroes) {
             Log.e("getHero",hero.getName()+": "+(hero.getName().equals(heroName)));
