@@ -4,24 +4,24 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_main"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_signin"
             android:title="Strona główna" />
         <item
             android:id="@+id/nav_scan"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/drawer_scanner" />
+            android:icon="@drawable/ic_qrcode"
+            android:title="Skaner QR" />
         <item
             android:id="@+id/nav_heroes"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_star"
             android:title="@string/drawer_heroes" />
         <item
             android:id="@+id/nav_map"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_marker"
             android:title="@string/drawer_map" />
         <item
             android:id="@+id/nav_challange"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/drawer_challenge" />
+            android:icon="@drawable/ic_question"
+            android:title="Zagadki" />
     </group>
 
 </menu>

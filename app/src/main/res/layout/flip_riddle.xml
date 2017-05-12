@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:backgroundTint="@android:color/black"
     android:backgroundTintMode="add"
@@ -8,24 +9,23 @@
     android:rowCount="10"
     android:columnCount="19">
 
-    <VideoView
-        android:id="@+id/riddle_surface"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="false"
-        android:layout_alignTop="@+id/riddle_text"
-        android:layout_below="@+id/riddle_name" />
 
-    <Button
-        android:id="@+id/riddle_button"
+    <!--<Button-->
+        <!--android:id="@+id/riddle_button"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_margin="20dp"-->
+        <!--android:layout_weight="5"-->
+        <!--android:text="Następna" />-->
+
+    <ImageView
+        android:id="@+id/riddle_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:layout_weight="5"
-        android:text="Następna" />
+        android:layout_below="@+id/riddle_name" />
 
     <TextView
         android:id="@+id/riddle_name"
@@ -37,26 +37,61 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:id="@+id/riddle_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/riddle_name" />
-
     <TextView
         android:id="@+id/riddle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/riddle_image"
-        android:layout_below="@+id/riddle_name"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/riddle_image"
+        android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/riddle_image"
         android:layout_toRightOf="@+id/riddle_image"
         android:text="TextView"
         android:textColor="?android:attr/editTextColor"
         android:textSize="20sp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
+        <Button
+            android:id="@+id/mapaBttn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false"
+            android:layout_weight="0.5"
+            android:background="@color/colorPrimary"
+            android:drawableEnd="@drawable/ic_marker"
+            android:drawableRight="@drawable/ic_marker"
+            android:drawableTint="#ffffff"
+            android:text="Mapa"
+            android:textColor="#fff"
+            android:textSize="20sp" />
 
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
 
+        <Button
+            android:id="@+id/skanerBttn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false"
+            android:layout_weight="0.5"
+            android:background="@color/colorPrimary"
+            android:drawableEnd="@drawable/ic_qrcode"
+            android:drawableRight="@drawable/ic_qrcode"
+            android:drawableTint="#ffffff"
+            android:text="Skaner"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </LinearLayout>
 </RelativeLayout>
