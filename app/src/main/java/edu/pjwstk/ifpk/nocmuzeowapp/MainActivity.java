@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity
     public  static final int FLIP_DETAILS = 5;
     public  static final int FLIP_SCAN = 1;
     public static final int FLIP_MAIN = 0;
-    private int current_page = FLIP_SCAN;
+    private int current_page = FLIP_MAIN;
 
     private final Map<Integer,Integer> pageMap = createPageMap() ;
     private Map<Integer,Integer> createPageMap(){

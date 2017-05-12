@@ -21,12 +21,6 @@
         <!--android:layout_weight="5"-->
         <!--android:text="Następna" />-->
 
-    <ImageView
-        android:id="@+id/riddle_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/riddle_name" />
-
     <TextView
         android:id="@+id/riddle_name"
         android:layout_width="wrap_content"
@@ -37,18 +31,24 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:id="@+id/riddle_image"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/riddle_name"
+        app:srcCompat="@drawable/detalis_batman" />
+
     <TextView
         android:id="@+id/riddle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/riddle_image"
         android:layout_below="@+id/riddle_image"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/riddle_image"
-        android:layout_toRightOf="@+id/riddle_image"
+        android:layout_marginTop="20dp"
         android:text="TextView"
         android:textColor="?android:attr/editTextColor"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:visibility="visible" />
 
     <LinearLayout
         android:layout_width="match_parent"
