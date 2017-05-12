@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:padding="10dp"
         app:srcCompat="@drawable/pjatk_logo" />
 
     <TextView
@@ -18,8 +20,11 @@
         android:layout_height="wrap_content"
 
         android:layout_below="@+id/logoMain"
-        android:text=" 1. instrukcja \n 2. instrukcja"
-        android:textSize="20sp" />
+        android:padding="10dp"
+        android:text=" 1. Rozwiąż zagadkę, by znaleźć kod QR wybranego bohatera. \n Pomocna będzie mapa \n 2. Zeskanuj kod QR \n 3. Kliknij na zebranego bohatera by dowiedzieć się o nim więcej \n 4. Zbierz wszystkich 8 bohaterów \n 5. Odbierz nagrodę \n 6. Powodzenia!"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        tools:text="@string/instructions" />
 
     <Button
         android:id="@+id/startBttn"

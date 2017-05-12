@@ -23,7 +23,57 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/abc1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp" />
+        android:layout_marginTop="85dp"
+        android:layout_above="@+id/linearLayout" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout">
 
+        <Button
+            android:id="@+id/riddleBttn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="false"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false"
+            android:layout_weight="0.5"
+            android:background="@color/colorPrimary"
+            android:drawableEnd="@drawable/ic_question"
+            android:drawableRight="@drawable/ic_question"
+            android:drawablePadding="2dp"
+            android:paddingLeft="32dp"
+            android:paddingRight="22dp"
+            android:drawableTint="#ffffff"
+            android:text="Zagadka"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+
+        <Button
+            android:id="@+id/scannerBttn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="false"
+            android:layout_centerVertical="false"
+            android:layout_weight="0.5"
+            android:background="@color/colorPrimary"
+            android:drawableEnd="@drawable/ic_qrcode"
+            android:drawableRight="@drawable/ic_qrcode"
+            android:paddingLeft="32dp"
+            android:paddingRight="22dp"
+            android:drawableTint="#ffffff"
+            android:text="Skaner"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </RelativeLayout>
