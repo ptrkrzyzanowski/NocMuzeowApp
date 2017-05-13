@@ -51,6 +51,20 @@ public class ScannerPage extends Page{
                 ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_HEROES,true); // true zapamiętuje stronę w backu
             }
         });
+        Button mapaBttn = (Button)ctx.findViewById(R.id.s_mapaBttn);
+        mapaBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_MAP,true);
+            }
+        });
+        Button riddleBttn = (Button)ctx.findViewById(R.id.s_riddleBttn);
+        riddleBttn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_RIDDLE,true);
+            }
+        });
         mPreview = (CameraSourcePreview) ctx.findViewById(R.id.preview);
         mGraphicOverlay = (GraphicOverlay<BarcodeGraphic>) ctx.findViewById(R.id.graphicOverlay);
         createCameraSource(true, false,this);

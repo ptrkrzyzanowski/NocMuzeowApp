@@ -1,6 +1,9 @@
 package edu.pjwstk.ifpk.nocmuzeowapp;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -164,13 +167,9 @@ public class MainActivity extends AppCompatActivity
                         applyFontToMenuItem(subMenuItem);
                     }
                 }
-
                 //the method we have create in activity
                 applyFontToMenuItem(mi);
             }
-
-
-
         }
     }
     @Override
@@ -216,6 +215,13 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            SharedPreferences sharedPref = getSharedPreferences("heroPref", Context.MODE_PRIVATE);// TODO: skasować z ostatecznej wersji. niebezpieczne
+            sharedPref.edit().clear().apply();
+            Intent i = getBaseContext().getPackageManager()
+                    .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
             return true;
         }
 
