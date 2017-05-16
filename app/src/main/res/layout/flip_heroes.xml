@@ -27,6 +27,7 @@ android:columnCount="19">
         android:padding="10dp"
         android:text="@string/heroes_instructions"
         android:textAlignment="center"
+        android:textSize="16sp"
         android:visibility="visible" />
 
 

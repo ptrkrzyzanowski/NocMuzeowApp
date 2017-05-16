@@ -23,13 +23,14 @@
 
     <TextView
         android:id="@+id/riddle_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Challenge"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:text="Challenge"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageView
         android:id="@+id/riddle_image"
@@ -45,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/riddle_image"
         android:layout_marginTop="20dp"
+        android:padding="10dp"
         android:text="TextView"
         android:textColor="?android:attr/editTextColor"
         android:textSize="20sp"
@@ -68,8 +70,9 @@
             android:background="@color/colorPrimary"
             android:drawableEnd="@drawable/ic_marker"
             android:drawableRight="@drawable/ic_marker"
-            android:paddingLeft="52dp"
-            android:paddingRight="38dp"
+            android:drawable="@android:color/white"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             android:drawableTint="#ffffff"
             android:text="Mapa"
             android:textColor="#fff"
@@ -91,8 +94,9 @@
             android:background="@color/colorPrimary"
             android:drawableEnd="@drawable/ic_qrcode"
             android:drawableRight="@drawable/ic_qrcode"
-            android:paddingLeft="32dp"
-            android:paddingRight="22dp"
+            android:drawable="@android:color/white"
+            android:paddingLeft="16dp"
+            android:paddingRight="15dp"
             android:drawableTint="#ffffff"
             android:text="Skaner"
             android:textColor="#fff"

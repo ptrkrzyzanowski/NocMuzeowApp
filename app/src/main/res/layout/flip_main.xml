@@ -11,20 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_weight="1"
+        android:contentDescription="logo"
         android:padding="10dp"
         app:srcCompat="@drawable/pjatk_logo" />
 
     <TextView
         android:id="@+id/instrukcja"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
 
         android:layout_above="@+id/startBttn"
         android:layout_below="@+id/logoMain"
+        android:layout_weight="1"
+        android:isScrollContainer="false"
+        android:nestedScrollingEnabled="false"
         android:padding="10dp"
         android:text="@string/instructions"
         android:textAlignment="center"
-        android:textSize="16sp"
+        android:textSize="19sp"
         tools:text="@string/instructions" />
 
     <Button
@@ -38,4 +43,5 @@
         android:text="Start"
         android:textColor="#fff"
         android:textSize="20sp" />
+
 </RelativeLayout>
