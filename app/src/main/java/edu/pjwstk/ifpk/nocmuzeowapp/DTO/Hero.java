@@ -42,6 +42,7 @@ public class Hero {
     public int getDrawable(){
         return image;
     }
+    public int getUnknownDrawable() {return image_unknown;}
     public int getDetailsDrawable(){return image_details;}
 
     private int id;
@@ -50,19 +51,12 @@ public class Hero {
     private String imagename;
     private int image;
     private int image_details;
+    private int image_unknown;
     private boolean known;
     public Hero(){
 
     }
-    public Hero(int id,String name, String description, String imagename){
-        this.id=id;
-        this.name=name;
-        this.description=description;
-        this.imagename=imagename;
-        this.known = false;
-
-    }
-    public Hero(int id,String name, String description, String imagename,int img,int detaimg,boolean known){
+    public Hero(int id,String name, String description, String imagename,int img,int uimg,int detaimg,boolean known){
         this.id=id;
         this.name=name;
         this.description=description;
@@ -70,6 +64,7 @@ public class Hero {
         this.image=img;
         this.image_details = detaimg;
         this.known = known;
+        this.image_unknown = uimg;
 
     }
 

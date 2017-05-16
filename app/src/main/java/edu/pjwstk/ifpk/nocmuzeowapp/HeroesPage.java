@@ -25,17 +25,20 @@ public class HeroesPage extends Page{
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
 
-                if(heroes.getHeroes().get(position).istKnown()){
-                    ((MainActivity)owner).swichToDetails(heroes.getHeroes().get(position));
-                }
-                else{
-                    if(position==heroes.getFirstUnknownHeroId()){
-                        ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_RIDDLE,true);
-                    }
-                    else {
-                        Toast.makeText(owner, "rozwiąż najpierw wcześniejszą zagadkę: "+heroes.getFirstUnknownHeroId(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+            if(heroes.getHeroes().get(position).istKnown()){
+                ((MainActivity)owner).switchToDetails(heroes.getHeroes().get(position));
+                return;
+            }
+            if(position<8){
+                ((MainActivity)ctx).switchToRiddle(position);
+
+                return;
+            }
+            if(heroes.getUnresolvedRiddleCount()!=1) {
+                Toast.makeText(owner, "rozwiąż najpierw wcześniejsze zagadki", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            ((MainActivity)ctx).switchToRiddle(8);
             }
         });
     }

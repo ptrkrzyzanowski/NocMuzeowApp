@@ -17,6 +17,7 @@ public class RiddlePage extends Page {
     ImageView imageIV;
     Button buttonBT;
     Button mapaBttn, skanerBttn;
+    public int heroID=0;
 
     RiddlePage(Activity activity,HeroAdapter heroes){
         ctx = activity;
@@ -50,7 +51,7 @@ public class RiddlePage extends Page {
     void onPageExit() {
     }
     void updateRiddle(){
-        Riddle riddle  = heroes.getFirstUnknownRiddle();
+        Riddle riddle  = heroes.getRiddleByHero(heroID);
         if(riddle!=null){
             nameTV.setText(riddle.getName());
             imageIV.setImageResource(riddle.getHero().getDetailsDrawable());

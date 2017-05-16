@@ -59,7 +59,7 @@ class HeroAdapter extends BaseAdapter {
         try {
             while ((line = buffer.readLine()) != null) {
                 String[] colums = line.split(";");
-                if (colums.length != 4) {
+                if (colums.length != 5) {
                     Log.d("CSVParser", "Skipping Bad CSV Row");
                     continue;
                 }
@@ -67,9 +67,11 @@ class HeroAdapter extends BaseAdapter {
                 Resources resources = context.getResources();
                 final int resourceId = resources.getIdentifier(colums[2].trim(), "drawable",
                         context.getPackageName());
-                final int detailsId = resources.getIdentifier(colums[3].trim(), "drawable",
+                final int detailsId = resources.getIdentifier(colums[4].trim(), "drawable",
                         context.getPackageName());
-                heroes.add(new Hero(insertedCount, colums[0].trim(),colums[1].trim(),colums[2].trim(),resourceId,detailsId,false));
+                final int resource_u_Id = resources.getIdentifier(colums[3].trim(),"drawable",
+                        context.getPackageName());
+                heroes.add(new Hero(insertedCount, colums[0].trim(),colums[1].trim(),colums[2].trim(),resourceId,resource_u_Id,detailsId,false));
                 insertedCount++;
             }
             inStream.close();
@@ -90,19 +92,19 @@ class HeroAdapter extends BaseAdapter {
                     continue;
                 }
                 Resources resources = context.getResources();
-                hero = this.getHero(colums[0]);
+                hero = this.getHero(colums[0].trim());
                 if(hero!=null){
-                    RiddleType type = RiddleType.getType(colums[2]);
+                    RiddleType type = RiddleType.getType(colums[2].trim());
                     if(type==RiddleType.RT_TEXT)
-                        riddles.add(new Riddle(hero,colums[1],RiddleType.RT_TEXT,colums[3],0));
+                        riddles.add(new Riddle(hero,colums[1].trim(),RiddleType.RT_TEXT,colums[3].trim(),0));
                     if(type==RiddleType.RT_IMAGE) {
                         final int resourceID = resources.getIdentifier(colums[3].trim(), "drawable",
                                 context.getPackageName());
                         Log.e("loadRiddle",""+resourceID);
-                        riddles.add(new Riddle(hero, colums[1], RiddleType.RT_IMAGE, "",resourceID));
+                        riddles.add(new Riddle(hero, colums[1].trim(), RiddleType.RT_IMAGE, "",resourceID));
                     }
                     if(type==RiddleType.RT_MOVIE)
-                        riddles.add(new Riddle(hero,colums[1],RiddleType.RT_MOVIE,colums[3],0));
+                        riddles.add(new Riddle(hero,colums[1].trim(),RiddleType.RT_MOVIE,colums[3].trim(),0));
                 }
             }
             inStream.close();
@@ -132,7 +134,6 @@ class HeroAdapter extends BaseAdapter {
                 this.notifyDataSetChanged();
                 cleanRiddles();
             }
-
         }
     }
     public int getFirstUnknownHeroId(){
@@ -143,6 +144,16 @@ class HeroAdapter extends BaseAdapter {
     public Riddle getFirstUnknownRiddle(){
         if(riddles.size()!=0)
             return riddles.get(0);
+        return null;
+    }
+    public int getUnresolvedRiddleCount(){
+        return riddles.size();
+    }
+    public Riddle getRiddleByHero(int heroid){
+        for(Riddle r:riddles){
+            if(r.getHero().getId()==heroid)
+                return r;
+        }
         return null;
     }
 
@@ -188,7 +199,7 @@ class HeroAdapter extends BaseAdapter {
             textView.setText(heroes.get(position).getName());
         }
         else{
-            imageView.setImageResource(R.drawable.hero_unknown);
+            imageView.setImageResource(heroes.get(position).getUnknownDrawable());
             textView.setText("????");
         }
         return view;

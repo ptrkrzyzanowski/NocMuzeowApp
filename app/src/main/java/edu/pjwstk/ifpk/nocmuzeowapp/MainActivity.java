@@ -275,8 +275,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void swichToDetails(Hero hero) {
+    public void switchToDetails(Hero hero) {
         ((DetailsPage)pages.get(FLIP_DETAILS)).setHero(hero);
         changeSelectedPage(FLIP_DETAILS,true);
+    }
+    public void switchToRiddle(int heroid){
+        ((RiddlePage)pages.get(FLIP_RIDDLE)).heroID = heroid;
+        changeSelectedPage(FLIP_RIDDLE,true);
     }
 }
