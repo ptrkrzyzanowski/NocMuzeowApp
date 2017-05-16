@@ -20,25 +20,25 @@ public class HeroesPage extends Page{
             Log.d("heroes page:init", "gridview == null");
         }
         heroes = adapter;
+
         gridview.setAdapter(heroes);
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
-
-            if(heroes.getHeroes().get(position).istKnown()){
-                ((MainActivity)owner).switchToDetails(heroes.getHeroes().get(position));
-                return;
-            }
-            if(position<8){
-                ((MainActivity)ctx).switchToRiddle(position);
-
-                return;
-            }
-            if(heroes.getUnresolvedRiddleCount()!=1) {
-                Toast.makeText(owner, "rozwiąż najpierw wcześniejsze zagadki", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            ((MainActivity)ctx).switchToRiddle(8);
+                if(heroes.getHeroes().get(position).istKnown()){
+                    ((MainActivity)owner).switchToDetails(heroes.getHeroes().get(position));
+                    return;
+                }
+                if(position<7){
+                    ((MainActivity)ctx).switchToRiddle(position);
+                    return;
+                }
+                if(heroes.getUnresolvedRiddleCount()>1) {
+                    Toast.makeText(owner, "rozwiąż najpierw wcześniejsze zagadki", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    ((MainActivity)ctx).switchToRiddle(position);
+                }
             }
         });
     }
