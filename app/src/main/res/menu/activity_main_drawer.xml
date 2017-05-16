@@ -5,7 +5,7 @@
         <item
             android:id="@+id/nav_main"
             android:icon="@drawable/ic_signin"
-            android:title="Strona główna" />
+            android:title="Instrukcje" />
         <item
             android:id="@+id/nav_scan"
             android:icon="@drawable/ic_qrcode"
@@ -18,10 +18,10 @@
             android:id="@+id/nav_map"
             android:icon="@drawable/ic_marker"
             android:title="@string/drawer_map" />
-        <item
-            android:id="@+id/nav_challange"
-            android:icon="@drawable/ic_question"
-            android:title="Zagadki" />
+        <!--<item-->
+            <!--android:id="@+id/nav_challange"-->
+            <!--android:icon="@drawable/ic_question"-->
+            <!--android:title="Zagadki" />-->
     </group>
 
 </menu>

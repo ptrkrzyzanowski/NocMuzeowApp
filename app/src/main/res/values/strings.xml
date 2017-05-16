@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NocMuzeowApp</string>
+    <string name="app_name">PJHero</string>
     <string name="app_name_readable">Noc Muzeów</string>
 
     <string name="navigation_drawer_open">Otwórz</string>
@@ -9,8 +9,8 @@
     <string name="drawer_heroes">Bohaterowie</string>
     <string name="drawer_map">Mapa</string>
 
-    <string name="instructions">1. Rozwiąż zagadkę, by znaleźć kod QR wybranego bohatera. \n Pomocna będzie mapa \n 2. Zeskanuj kod QR \n 3. Kliknij na zebranego bohatera by dowiedzieć się o nim więcej \n 4. Zbierz wszystkich 8 bohaterów \n 5. Odbierz nagrodę \n 6. Powodzenia!</string>
-
+    <string name="instructions">1. Rozwiąż zagadkę by znaleźć kod QR wybranego bohatera. Pomocna będzie mapa. \n 2. Zeskanuj kod QR. \n 3. Kliknij na zebranego bohatera by dowiedzieć się o nim więcej. \n 4. Zbierz wszystkich ośmiu bohaterów. \n 5. Odbierz nagrodę. \n 6. Powodzenia!</string>
+    <string name="heroes_instructions">Kliknij na nieznanego bohatera, by poznać zagadkę.</string>
     <string name="action_settings">Ustawienia</string>
 
 

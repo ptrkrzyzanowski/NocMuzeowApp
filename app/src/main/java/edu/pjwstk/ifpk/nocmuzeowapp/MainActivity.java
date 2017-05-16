@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
     private Map<Integer,Integer> createPageMap(){
         Map<Integer,Integer> map = new HashMap<>();
         map.put( R.id.nav_heroes,FLIP_HEROES);
-        map.put( R.id.nav_challange,FLIP_RIDDLE);
+//        map.put( R.id.nav_challange,FLIP_RIDDLE);
         map.put( R.id.nav_map,FLIP_MAP);
         map.put( R.id.nav_scan,FLIP_SCAN);
         map.put( R.id.nav_main,FLIP_MAIN);
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity
             for (int i=0;i<m.size();i++) {
                 MenuItem mi = m.getItem(i);
 
-                //for aapplying a font to subMenu ...
+                //for applying a font to subMenu ...
                 SubMenu subMenu = mi.getSubMenu();
                 if (subMenu!=null && subMenu.size() >0 ) {
                     for (int j=0; j <subMenu.size();j++) {
