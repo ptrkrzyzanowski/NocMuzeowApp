@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,7 +30,8 @@ public class ScannerPage extends Page{
 
     TextView foundText;
     Button foundButton;
-    LinearLayout foundLayout;
+    RelativeLayout foundLayout;
+    LinearLayout linearButtonsLayout;
     ImageView foundImage;
     String foundName;
     private static final int RC_HANDLE_GMS = 9001;
@@ -40,13 +42,15 @@ public class ScannerPage extends Page{
         this.heroes = heroes;
         foundText = (TextView) ctx.findViewById(R.id.foundHeroText);
         foundButton = (Button) ctx.findViewById(R.id.foundHeroButton);
-        foundLayout = (LinearLayout) ctx.findViewById(R.id.foundHeroLayout);
+        foundLayout = (RelativeLayout) ctx.findViewById(R.id.foundHeroLayout);
         foundImage = (ImageView) ctx.findViewById(R.id.foundHeroImage);
+        linearButtonsLayout = (LinearLayout) ctx.findViewById(R.id.linearButtonsLayout);
         foundButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 foundLayout.setVisibility(View.INVISIBLE);
+                linearButtonsLayout.setVisibility(View.VISIBLE);
                 heroes.meetHero(ctx,foundName);
                 ((MainActivity)ctx).changeSelectedPage(MainActivity.FLIP_HEROES,true); // true zapamiętuje stronę w backu
             }
@@ -80,10 +84,11 @@ public class ScannerPage extends Page{
         ctx.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                foundText.setText("Znalazłeś\r\n"+heroName);
+                foundText.setText("Znalazłeś:\r\n"+heroName);
                 foundName=heroName;
                 foundImage.setImageResource(hero.getDrawable());
                 foundLayout.setVisibility(View.VISIBLE);
+                linearButtonsLayout.setVisibility(View.INVISIBLE);
             }
         });
         Log.e("trySetFoundHeroes","znaleziono "+heroName);
