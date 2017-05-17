@@ -9,18 +9,6 @@
     android:rowCount="10"
     android:columnCount="19">
 
-
-    <!--<Button-->
-        <!--android:id="@+id/riddle_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentEnd="true"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_margin="20dp"-->
-        <!--android:layout_weight="5"-->
-        <!--android:text="Następna" />-->
-
     <TextView
         android:id="@+id/riddle_name"
         android:layout_width="match_parent"
@@ -68,12 +56,11 @@
             android:layout_centerVertical="false"
             android:layout_weight="0.5"
             android:background="@color/colorPrimary"
-            android:drawableEnd="@drawable/ic_marker"
-            android:drawableRight="@drawable/ic_marker"
+            android:drawableEnd="@drawable/ic_marker_w"
+            android:drawableRight="@drawable/ic_marker_w"
             android:drawable="@android:color/white"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:drawableTint="#ffffff"
             android:text="Mapa"
             android:textColor="#fff"
             android:textSize="20sp" />
@@ -92,12 +79,11 @@
             android:layout_centerVertical="false"
             android:layout_weight="0.5"
             android:background="@color/colorPrimary"
-            android:drawableEnd="@drawable/ic_qrcode"
-            android:drawableRight="@drawable/ic_qrcode"
+            android:drawableEnd="@drawable/ic_qrcode_w"
+            android:drawableRight="@drawable/ic_qrcode_w"
             android:drawable="@android:color/white"
             android:paddingLeft="16dp"
             android:paddingRight="15dp"
-            android:drawableTint="#ffffff"
             android:text="Skaner"
             android:textColor="#fff"
             android:textSize="20sp" />
