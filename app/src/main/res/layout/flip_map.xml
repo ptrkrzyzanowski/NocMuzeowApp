@@ -24,6 +24,7 @@
         android:id="@+id/tabHost"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayout"
         android:layout_alignParentTop="false"
         android:layout_below="@+id/abc1"
         android:layout_centerHorizontal="true">
@@ -55,7 +56,8 @@
                         android:layout_height="match_parent"
                         android:layout_above="@+id/linearLayout"
                         android:layout_below="@+id/abc1"
-                        android:layout_centerHorizontal="true" />
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center" />
 
                 </LinearLayout>
 
@@ -81,19 +83,13 @@
                     android:background="#5b89ff"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="This is tab 3" />
-
                     <WebView
                         android:id="@+id/mapwview3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_above="@+id/linearLayout"
                         android:layout_below="@+id/abc1"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="85dp" />
+                        android:layout_centerHorizontal="true" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>

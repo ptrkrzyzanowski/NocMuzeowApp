@@ -3,27 +3,32 @@
 android:orientation="vertical" android:layout_width="match_parent"
 android:backgroundTint="@android:color/black"
 android:backgroundTintMode="add"
-android:layout_height="match_parent"
-android:rowCount="10"
-android:columnCount="19">
+android:layout_height="match_parent">
 
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/heroesview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:columnWidth="200dp"
-        android:numColumns="3"
-        android:verticalSpacing="3dp"
-        android:horizontalSpacing="3dp"
-        android:stretchMode="columnWidth"
         android:gravity="center"
-        />
+        android:horizontalSpacing="3dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:textAlignment="center"
+        android:verticalSpacing="3dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/heroesview"
+        android:layout_marginTop="5dp"
         android:padding="10dp"
         android:text="@string/heroes_instructions"
         android:textAlignment="center"
