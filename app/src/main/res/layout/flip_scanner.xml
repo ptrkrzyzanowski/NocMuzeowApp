@@ -21,25 +21,9 @@ android:layout_height="match_parent">
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="0dp"
-            android:foregroundGravity="center_vertical|center_horizontal|center"
+            android:foregroundGravity="center_vertical|fill_vertical|center_horizontal|center"
             android:padding="0dp" />
     </edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview>
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/foundHeroLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_vertical"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:foregroundTint="@color/colorPrimary"-->
-        <!--android:gravity="center_vertical|fill_horizontal"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingLeft="5dp"-->
-        <!--android:paddingRight="5dp"-->
-        <!--android:visibility="invisible"-->
-        <!--android:weightSum="1">-->
-
-    <!--</LinearLayout>-->
 
     <RelativeLayout
         android:id="@+id/foundHeroLayout"
