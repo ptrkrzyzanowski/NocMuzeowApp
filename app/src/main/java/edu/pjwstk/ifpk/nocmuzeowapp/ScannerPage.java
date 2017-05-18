@@ -83,8 +83,16 @@ public class ScannerPage extends Page{
     public void trySetFoundHeroes(final String heroName){
 
         Log.e("trySetFoundHeroes",heroName);
-        final Hero hero = heroes.getHero(heroName);
+        final String s[] = heroName.split("_");
+        final Hero hero = heroes.getHero(s[0]);
+
         if(hero == null||hero.istKnown()){
+            return;
+        }
+        if(Integer.parseInt(s[1].subSequence(1,2).toString())!=(hero.getUnknownDrawable()%10)){
+            return;
+        }
+        if(Integer.parseInt(s[1].subSequence(2,3).toString())!=(hero.getName().length()%10)){
             return;
         }
         final int countUnknown = heroes.getRiddles().size();
@@ -93,7 +101,7 @@ public class ScannerPage extends Page{
         ctx.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                foundText.setText("Znalazłeś:\r\n"+heroName);
+                foundText.setText("Znalazłeś:\r\n"+s[0]);
                 foundName=heroName;
                 foundImage.setImageResource(hero.getDrawable());
                 foundLayout.setVisibility(View.VISIBLE);
