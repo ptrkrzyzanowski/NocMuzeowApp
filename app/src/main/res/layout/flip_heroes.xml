@@ -22,7 +22,7 @@ android:layout_height="match_parent">
         android:verticalSpacing="3dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/hero_instr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"

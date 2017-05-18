@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -29,6 +30,7 @@ public class ScannerPage extends Page{
     private GraphicOverlay<BarcodeGraphic> mGraphicOverlay;
 
     TextView foundText;
+    TextView heroInstructions;
     Button foundButton;
     RelativeLayout foundLayout;
     LinearLayout linearButtonsLayout;
@@ -41,6 +43,10 @@ public class ScannerPage extends Page{
         ctx = owner;
         this.heroes = heroes;
         foundText = (TextView) ctx.findViewById(R.id.foundHeroText);
+        heroInstructions = (TextView) ctx.findViewById(R.id.hero_instr);
+        if(heroes.getFirstUnknownHeroId()==-1){
+            heroInstructions.setText(R.string.heroes_instructions_solved);
+        }
         foundButton = (Button) ctx.findViewById(R.id.foundHeroButton);
         foundLayout = (RelativeLayout) ctx.findViewById(R.id.foundHeroLayout);
         foundImage = (ImageView) ctx.findViewById(R.id.foundHeroImage);
@@ -81,6 +87,9 @@ public class ScannerPage extends Page{
         if(hero == null||hero.istKnown()){
             return;
         }
+        final int countUnknown = heroes.getRiddles().size();
+        Log.e("trySetFoundHeroes","unknown count =  "+countUnknown);
+
         ctx.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -88,6 +97,10 @@ public class ScannerPage extends Page{
                 foundName=heroName;
                 foundImage.setImageResource(hero.getDrawable());
                 foundLayout.setVisibility(View.VISIBLE);
+                if(countUnknown==1){
+                    Toast.makeText(ctx, R.string.heroes_instructions_solved, Toast.LENGTH_SHORT).show();
+                    heroInstructions.setText(R.string.heroes_instructions_solved);
+                }
                 linearButtonsLayout.setVisibility(View.INVISIBLE);
             }
         });
