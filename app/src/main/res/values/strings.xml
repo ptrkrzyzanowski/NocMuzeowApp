@@ -9,7 +9,7 @@
     <string name="drawer_heroes">Bohaterowie</string>
     <string name="drawer_map">Mapa</string>
 
-    <string name="instructions">1. Rozwiąż zagadkę by znaleźć kod QR wybranego bohatera. Pomocna będzie mapa. \n 2. Zeskanuj kod QR. \n 3. Kliknij na zebranego bohatera by dowiedzieć się o nim więcej. \n 4. Zbierz wszystkich ośmiu bohaterów. \n 5. Odbierz nagrodę. \n 6. Powodzenia!</string>
+    <string name="instructions">1. Rozwiąż zagadkę by znaleźć kod QR wybranego bohatera. Pomocna będzie mapa. \n 2. Zeskanuj kod QR. \n 3. Kliknij na zebranego bohatera by dowiedzieć się o nim więcej. \n 4. Zbierz wszystkich ośmiu bohaterów. \n 5. Odbierz nagrodę. \n 6. Powodzenia!\n sfsf\n sdfsdf\n sdfsf\n sdfsfs\n sdfsf</string>
     <string name="heroes_instructions">Kliknij na nieznanego bohatera, by poznać zagadkę.</string>
     <string name="heroes_instructions_solved">Gratulacje! rozwiązałeś już wszystkie zagadki.</string>
 
