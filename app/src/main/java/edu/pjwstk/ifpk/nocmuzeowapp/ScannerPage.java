@@ -102,7 +102,7 @@ public class ScannerPage extends Page{
             @Override
             public void run() {
                 foundText.setText("Znalazłeś:\r\n"+s[0]);
-                foundName=heroName;
+                foundName=s[0];
                 foundImage.setImageResource(hero.getDrawable());
                 foundLayout.setVisibility(View.VISIBLE);
                 if(countUnknown==1){

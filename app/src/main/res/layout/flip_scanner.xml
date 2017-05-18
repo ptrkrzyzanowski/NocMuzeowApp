@@ -10,7 +10,7 @@ android:layout_height="match_parent">
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="fill_vertical|center_horizontal|fill_horizontal"
         android:layout_weight=".35"
         android:foregroundGravity="center"
         android:paddingBottom="0dp"
@@ -18,7 +18,7 @@ android:layout_height="match_parent">
 
         <edu.pjwstk.ifpk.nocmuzeowapp.GraphicOverlay
             android:id="@+id/graphicOverlay"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="0dp"
             android:foregroundGravity="center_vertical|fill_vertical|center_horizontal|center"
