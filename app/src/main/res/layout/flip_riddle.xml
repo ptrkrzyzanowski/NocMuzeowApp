@@ -22,11 +22,11 @@
 
     <ImageView
         android:id="@+id/riddle_image"
-        android:adjustViewBounds="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="206dp"
         android:layout_below="@+id/riddle_name"
-        app:srcCompat="@drawable/detalis_batman" />
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/unknown_sprmn" />
 
     <TextView
         android:id="@+id/riddle_text"
