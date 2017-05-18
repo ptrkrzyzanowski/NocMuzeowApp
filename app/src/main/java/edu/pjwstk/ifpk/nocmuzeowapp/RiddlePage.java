@@ -54,7 +54,7 @@ public class RiddlePage extends Page {
         Riddle riddle  = heroes.getRiddleByHero(heroID);
         if(riddle!=null){
             nameTV.setText(riddle.getName());
-            imageIV.setImageResource(riddle.getHero().getDetailsDrawable());
+            imageIV.setImageResource(riddle.getHero().getUnknownDrawable());
             descriptionTV.setText(riddle.getDescription());
         }
         else{
