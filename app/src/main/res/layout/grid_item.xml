@@ -6,7 +6,9 @@
     android:layout_centerInParent="true"
     android:layout_centerVertical="true"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/grid_item_image"
