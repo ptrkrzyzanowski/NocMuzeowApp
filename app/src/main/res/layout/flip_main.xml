@@ -20,7 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/startBttn"
-        android:layout_below="@+id/logoMain">
+        android:layout_below="@+id/logoMain"
+        android:fadeScrollbars="false"
+        android:scrollbarSize="?android:attr/scrollbarSize"
+        android:scrollbarStyle="insideInset"
+        tools:scrollbarSize="4dp">
 
         <LinearLayout
             android:layout_width="match_parent"
