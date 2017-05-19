@@ -90,7 +90,7 @@ public class ScannerPage extends Page{
             return;
         }
         if(Integer.parseInt(s[1].subSequence(1,2).toString())!=(hero.getUnknownDrawable()%10)){
-            return;
+          //  return;
         }
         if(Integer.parseInt(s[1].subSequence(2,3).toString())!=(hero.getName().length()%10)){
             return;
