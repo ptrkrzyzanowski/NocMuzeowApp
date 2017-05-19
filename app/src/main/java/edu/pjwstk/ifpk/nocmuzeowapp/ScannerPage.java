@@ -87,6 +87,9 @@ public class ScannerPage extends Page{
         final Hero hero = heroes.getHero(s[0]);
 
         if(hero == null||hero.istKnown()){
+            if(hero.istKnown()){
+                Toast.makeText(ctx, "Znaleziono już tego bohatera", Toast.LENGTH_SHORT).show();
+            }
             return;
         }
         if(Integer.parseInt(s[1].subSequence(1,2).toString())!=(hero.getUnknownDrawable()%10)){
