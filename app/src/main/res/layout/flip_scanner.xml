@@ -16,13 +16,16 @@ android:layout_height="match_parent">
         android:paddingBottom="0dp"
         android:paddingTop="0dp">
 
-        <edu.pjwstk.ifpk.nocmuzeowapp.GraphicOverlay
-            android:id="@+id/graphicOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="0dp"
-            android:foregroundGravity="fill_vertical|fill_horizontal|center"
-            android:padding="0dp" />
+
+
+    <edu.pjwstk.ifpk.nocmuzeowapp.GraphicOverlay
+        android:id="@+id/graphicOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:foregroundGravity="fill_vertical|fill_horizontal|center"
+        android:padding="0dp" />
+
     </edu.pjwstk.ifpk.nocmuzeowapp.CameraSourcePreview>
 
     <ImageView
@@ -30,6 +33,7 @@ android:layout_height="match_parent">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
         app:srcCompat="@drawable/frame" />
 
     <RelativeLayout
